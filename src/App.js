@@ -51,33 +51,33 @@ function App() {
         id: "de", name: "Deutsch"
     }, {id: "en", name: "Englisch"}];
     const [languageChecked, setLanguageChecked] = React.useState({Deutsch: false, Englisch: false});
-    const categorys = [{
-        id: "business",
-        name: "Wirtschaft"
-    }, {
-        id: "entertainment",
-        name: "Unterhaltung"
-    }, {
-        id: "general",
-        name: "Allgemein"
-    }, {
-        id: "health",
-        name: "Gesundheit"
-    }, {
-        id: "science",
-        name: "Wissenschaft"
-    }, {
-        id: "sports",
-        name: "Sport"
-    }, {
-        id: "technology",
-        name: "Technologie"
-    }];
-    const [categoryChecked, setCategoryChecked] = React.useState({
-            Wirtschaft: false, Unterhaltung: false, Allgemein: false, Gesundheit: false,
-            Wissenschaft: false, Sport: false, Technologie: false
-        }
-    );
+    // const categorys = [{
+    //     id: "business",
+    //     name: "Wirtschaft"
+    // }, {
+    //     id: "entertainment",
+    //     name: "Unterhaltung"
+    // }, {
+    //     id: "general",
+    //     name: "Allgemein"
+    // }, {
+    //     id: "health",
+    //     name: "Gesundheit"
+    // }, {
+    //     id: "science",
+    //     name: "Wissenschaft"
+    // }, {
+    //     id: "sports",
+    //     name: "Sport"
+    // }, {
+    //     id: "technology",
+    //     name: "Technologie"
+    // }];
+    // const [categoryChecked, setCategoryChecked] = React.useState({
+    //         Wirtschaft: false, Unterhaltung: false, Allgemein: false, Gesundheit: false,
+    //         Wissenschaft: false, Sport: false, Technologie: false
+    //     }
+    // );
 
     useEffect(() => {
         async function fetchNewsPages() {
@@ -109,19 +109,19 @@ function App() {
         </List>
     );
 
-    const Intro = () => {
-        return (
-            <ContainerIntro>
-                <StlyedTypography use="headline4">Wählen Sie bitte die Sprache der News: </StlyedTypography>
-                {SwitchForIntro(languages, languageChecked, setLanguageChecked)}
-                <ListDivider/>
-                <br/>
-                <StlyedTypography use="headline4">Wählen Sie bitte die gewünschten Resorts: </StlyedTypography>
-                {SwitchForIntro(categorys, categoryChecked, setCategoryChecked)}
-                <StyledButton label="Bestätigen" unelevated/>
-            </ContainerIntro>
-        );
-    };
+    // const Intro = () => {
+    //     return (
+    //         <ContainerIntro>
+    //             <StlyedTypography use="headline4">Wählen Sie bitte die Sprache der News: </StlyedTypography>
+    //             {SwitchForIntro(languages, languageChecked, setLanguageChecked)}
+    //             <ListDivider/>
+    //             <br/>
+    //             <StlyedTypography use="headline4">Wählen Sie bitte die gewünschten Resorts: </StlyedTypography>
+    //             {SwitchForIntro(categorys, categoryChecked, setCategoryChecked)}
+    //             <StyledButton label="Bestätigen" unelevated/>
+    //         </ContainerIntro>
+    //     );
+    // };
 
 
     return (
@@ -130,7 +130,7 @@ function App() {
             <RenderNavBar sources={sources} selectNewsPage={setNewsPageID} showSideBar={hideSideBar}
                           hideSideBar={hideSideBar}/>
             <Content showSideBar={hideSideBar}>
-                <Intro/>
+                {/*<Intro/>*/}
                 {newsPageID.length && <NewsContent currentNewsPageID={newsPageID}/>}
             </Content>
         </>
