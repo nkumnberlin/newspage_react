@@ -54,7 +54,6 @@ const RenderHeadlines = ({articles, source}) => {
             </StyledCardPrimary>
         </Container>
     );
-    console.log(source)
     return (
         <StyledCard outlined style={{width: '21rem'}}>
             <Typography

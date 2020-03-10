@@ -20,7 +20,7 @@ export async function awsQueryNewspages(query) {
     return await response.json();
 }
 export async function awsQueryHeadlines(id) {
-    const url = BACKENDURL + `news?sources=${id}`
+    const url = BACKENDURL + `news?sources=${id}`;
     const token = tokenGenerator();
     const response = await fetch(proxyURL + url, {
         method: 'get',
