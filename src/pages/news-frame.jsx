@@ -25,8 +25,7 @@ margin-top: 2rem !important`;
 const StyledCardPrimary = styled(CardPrimaryAction)`
 width: 100% !important`;
 
-const RenderHeadlines = (props) => {
-    const {articles} = props;
+const RenderHeadlines = ({articles, source}) => {
     const Headlines = () => (
         <>
             {articles.map((key, index) => {
@@ -55,6 +54,7 @@ const RenderHeadlines = (props) => {
             </StyledCardPrimary>
         </Container>
     );
+    console.log(source)
     return (
         <StyledCard outlined style={{width: '21rem'}}>
             <Typography
@@ -63,7 +63,7 @@ const RenderHeadlines = (props) => {
                 style={{padding: '0.5rem 1rem'}}
                 theme="textSecondaryOnBackground"
             >
-                Headlines
+                Headlines {source}
             </Typography>
 
             <ListDivider/>
