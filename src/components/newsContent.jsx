@@ -13,7 +13,6 @@ function PrepareContent({currentNewsPageID, setSnackbar, language, setSpinner,se
                 setArticles(articles);
                 const {source} = articles[0];
                 setSpinner(false);
-                setHideBackground(true);
                 setSnackbar({
                     showSnackbar: true,
                     message: language === 'de' ? `Neue Headlines von ${source.name} wurden geladen` : `Headlines of ${source.name} loaded`

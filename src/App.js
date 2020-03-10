@@ -20,6 +20,17 @@ position: relative;
  padding: ${props => (props.showSideBar ? '0 2rem 0 calc(256px + 32px)' : '2rem')};
 `;
 
+
+const Background = styled.div`
+background-image: ${props => (props.hideBackground ? '' : `url(${Logo});`)}
+height: 1000px;
+width: 100%;
+
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+`;
+
+
 const StyledSpinner = styled(Spinner)`
 width: 100% !important`;
 
@@ -37,11 +48,6 @@ const Overlay = styled.div`
   cursor: pointer; 
 `;
 
-const Background = styled.div`
-background-image: ${props => (props.hideBackground ? '' : `url(${Logo});`)}
-height: 1000px;
-width: 100%;
-`;
 
 const getNewspages = (lang) => {
     const query = {
@@ -57,7 +63,7 @@ function App() {
     const [hideSideBar, setHideSideBar] = useState(false);
     const [language, setLanguage] = useState({});
     const [showSpinner, setSpinner] = useState(false);
-    const [hideBackground, setHideBackground] = useState(false)
+    const [hideBackground, setHideBackground] = useState(false);
     const [snackbar, setSnackbar] = useState({
         showSnackbar: false,
         message: ''
@@ -93,19 +99,20 @@ function App() {
 
     const {showSnackbar, message} = snackbar;
     return (
-        <Background hideBackground={hideBackground}>
+        <>
             <Overlay showSpinner={showSpinner}/>
             <TopAppBar hideSideBar={setHideSideBar} showSideBar={hideSideBar} changeLanguage={setLanguage}/>
             <RenderNavBar sources={sources} selectNewsPage={setNewsPageID} showSideBar={hideSideBar}
                           hideSideBar={hideSideBar}/>
             <Content showSideBar={hideSideBar}>
-                <StyledSpinner showSpinner={showSpinner}/>
-                {newsPageID.length &&
-                <NewsContent currentNewsPageID={newsPageID} setSnackbar={setSnackbar} language={language}
-                             setSpinner={setSpinner} setHideBackground={setHideBackground}/>}
+                <Background>
+                    {newsPageID.length &&
+                    <NewsContent currentNewsPageID={newsPageID} setSnackbar={setSnackbar} language={language}
+                                 setSpinner={setSpinner}/>}
+                </Background>
             </Content>
             <ShowSnackbar open={showSnackbar} message={message} setSnackbar={setSnackbar}/>
-        </Background>
+        </>
     );
 }
 
