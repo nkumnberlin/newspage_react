@@ -6,28 +6,18 @@ import NewsContent from "./components/newsContent";
 import {awsQueryNewspages} from "./api";
 import ShowSnackbar from './components/snackbar';
 import Spinner from './components/circularSpinner';
-import Logo from './assets/images/news-page.jpg';
-import '@material/list/dist/mdc.list.css';
-import '@material/switch/dist/mdc.switch.css';
-import '@material/form-field/dist/mdc.form-field.css';
-import '@material/typography/dist/mdc.typography.css';
+import Intro from './components/intro';
+import Header from "./assets/images/newspage-header.png";
+import {ImageListImage} from "@rmwc/image-list";
 
-import '@material/button/dist/mdc.button.css';
+
+
 
 const Content = styled.div`
+height: 100%;
 position: relative;
   display: block;
  padding: ${props => (props.showSideBar ? '0 2rem 0 calc(256px + 32px)' : '2rem')};
-`;
-
-
-const Background = styled.div`
-background-image: ${props => (props.hideBackground ? '' : `url(${Logo});`)}
-height: 1000px;
-width: 100%;
-
-  background-attachment: fixed;
-  background-repeat: no-repeat;
 `;
 
 
@@ -56,14 +46,12 @@ const getNewspages = (lang) => {
     return awsQueryNewspages(query);
 };
 
-
 function App() {
     const [sources, setSources] = useState({});
     const [newsPageID, setNewsPageID] = useState({});
     const [hideSideBar, setHideSideBar] = useState(false);
     const [language, setLanguage] = useState({});
     const [showSpinner, setSpinner] = useState(false);
-    const [hideBackground, setHideBackground] = useState(false);
     const [snackbar, setSnackbar] = useState({
         showSnackbar: false,
         message: ''
@@ -100,16 +88,15 @@ function App() {
     const {showSnackbar, message} = snackbar;
     return (
         <>
-            <Overlay showSpinner={showSpinner}/>
             <TopAppBar hideSideBar={setHideSideBar} showSideBar={hideSideBar} changeLanguage={setLanguage}/>
             <RenderNavBar sources={sources} selectNewsPage={setNewsPageID} showSideBar={hideSideBar}
                           hideSideBar={hideSideBar}/>
+            <Overlay showSpinner={showSpinner}/>
+            <ImageListImage src={Header}/>
             <Content showSideBar={hideSideBar}>
-                <Background>
-                    {newsPageID.length &&
-                    <NewsContent currentNewsPageID={newsPageID} setSnackbar={setSnackbar} language={language}
-                                 setSpinner={setSpinner}/>}
-                </Background>
+                {language.length ?
+                <NewsContent currentNewsPageID={newsPageID} setSnackbar={setSnackbar} language={language}
+                             setSpinner={setSpinner}/> : <Intro changeLanguage={setLanguage}/>}
             </Content>
             <ShowSnackbar open={showSnackbar} message={message} setSnackbar={setSnackbar}/>
         </>

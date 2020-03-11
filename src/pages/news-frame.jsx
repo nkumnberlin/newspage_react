@@ -66,7 +66,7 @@ const RenderHeadlines = ({articles, source}) => {
             </Typography>
 
             <ListDivider/>
-            {articles.length && <Headlines/>}
+            { articles.length ? <Headlines/> : ''}
             <ListDivider/>
             <CardActions fullBleed>
                 <CardActionButton

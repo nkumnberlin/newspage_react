@@ -35,7 +35,7 @@ const RenderTopAppBar = (props) => {
                         <AppBarTitle>The - New - Newspage</AppBarTitle>
                     </TopAppBarSection>
                     <TopAppBarSection alignEnd>
-                        <AppBarTitle>Sprache:</AppBarTitle>
+                        <AppBarTitle>Change Language:</AppBarTitle>
                         <AppBarTitle onClick={() => changeLanguage("de")}>DE</AppBarTitle>
                         <AppBarEnd onClick={() => changeLanguage("en")}>EN</AppBarEnd>
                     </TopAppBarSection>
