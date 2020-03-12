@@ -1,27 +1,47 @@
 import React, {useState, useEffect} from 'react';
 import {awsQueryHeadlines} from "../api";
 import RenderHeadlines from "../pages/news-frame";
+import {ErrorImage} from '../pages/images';
 
-function PrepareContent(props) {
+
+function PrepareContent({currentNewsPageID, setSnackbar, language, setSpinner, setHideBackground}) {
     const [articles, setArticles] = useState({});
-    const {currentNewsPageID} = props;
 
     useEffect(() => {
         async function updateNewsPage() {
             try {
+                setSpinner(true);
                 const {articles} = await awsQueryHeadlines(currentNewsPageID);
                 setArticles(articles);
+                QuerySuccess(articles);
             } catch (e) {
-                console.warn("Error: ", e);
+                QueryFailed();
             }
         }
 
-        updateNewsPage();
+        if (typeof currentNewsPageID !== "object") updateNewsPage();
     }, [currentNewsPageID]);
 
+    const QuerySuccess = (articles) => {
+        const {source} = articles[0];
+        setSpinner(false);
+        setSnackbar({
+            showSnackbar: true,
+            message: language === 'de' ? `Neue Headlines von ${source.name} wurden geladen` : `Headlines of ${source.name} loaded`
+        });
+    };
+
+    const QueryFailed = () => {
+        setSpinner(false);
+        setArticles({error: true})
+        setSnackbar({
+            showSnackbar: true,
+            message: language === 'de' ? `Fehler beim Darstellen der News` : `Error while displaying the news`
+        });
+    };
     return (
         <>
-            <RenderHeadlines articles={articles}/>
+            {articles.error ? ErrorImage() : <RenderHeadlines articles={articles}/>}
         </>
     );
 }

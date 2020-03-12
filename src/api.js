@@ -3,7 +3,8 @@ const proxyURL = 'https://cors-anywhere.herokuapp.com/';
 
 
 export async function awsQueryNewspages(query) {
-    const url =   BACKENDURL + `sources?language=${query.language}&category=${query.category}`
+    const url = BACKENDURL + `sources?language=${query.language}`;
+    // &category=${query.category}
     const token = tokenGenerator();
     const response = await fetch(proxyURL + url, {
         method: 'get',
@@ -14,11 +15,12 @@ export async function awsQueryNewspages(query) {
             'Authorization': token,
         }
     });
+
     //2Az2Zahlen2Sonderzeichen
     return await response.json();
 }
 export async function awsQueryHeadlines(id) {
-    const url = BACKENDURL + `news?sources=${id}`
+    const url = BACKENDURL + `news?sources=${id}`;
     const token = tokenGenerator();
     const response = await fetch(proxyURL + url, {
         method: 'get',
