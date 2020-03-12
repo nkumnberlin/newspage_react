@@ -7,8 +7,6 @@ import {
     TopAppBarTitle,
     TopAppBarFixedAdjust
 } from '@rmwc/top-app-bar';
-import '@material/top-app-bar/dist/mdc.top-app-bar.css';
-import '@rmwc/icon/icon.css';
 import styled from 'styled-components';
 
 const AppBarTitle = styled(TopAppBarTitle)`

@@ -4,6 +4,7 @@ import {List, ListItem} from '@rmwc/list';
 import '@material/drawer/dist/mdc.drawer.css';
 import '@material/list/dist/mdc.list.css';
 
+
 const NewsList = (sources,selectNewsPage) => (
     <>
         {!!sources.length && <List>
@@ -18,10 +19,10 @@ const NewsList = (sources,selectNewsPage) => (
     </>
 );
 
-const RenderNavBar = (props) => {
-    const {sources, selectNewsPage, showSideBar} = props;
+const RenderNavBar = ({sources, selectNewsPage, showSideBar, hideSideBar}) => {
+
     return (
-        <Drawer dismissible open={showSideBar}>
+        <Drawer hideSideBar={hideSideBar} dismissible open={showSideBar}>
             <DrawerHeader>
                 <DrawerTitle>List of Newspages</DrawerTitle>
             </DrawerHeader>

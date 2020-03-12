@@ -25,35 +25,39 @@ margin-top: 2rem !important`;
 const StyledCardPrimary = styled(CardPrimaryAction)`
 width: 100% !important`;
 
+const renderTitle = (key, index) => (
+    <Container>
+        <StyledImage
+            sixteenByNine
+            style={{
+                backgroundImage: `url(${key.urlToImage})`
+            }}
+        />
+        <StyledCardPrimary key={index} onClick={() => window.open(`${key.url}, '_blank'`)}>
+            <div style={{padding: '1rem'}}>
+                <Typography use="headline5" tag="div">
+                    {key.title}
+                </Typography>
+                <Typography use="body1" tag="p" theme="textSecondaryOnBackground">
+                    {key.description}
+                </Typography>
+            </div>
+        </StyledCardPrimary>
+    </Container>
+);
+
 const RenderHeadlines = ({articles, source}) => {
+    let nameOfHeadline = '';
     const Headlines = () => (
         <>
             {articles.map((key, index) => {
+                nameOfHeadline = key.source.name;
                 return renderTitle(key, index);
             })}
         </>
     );
 
-    const renderTitle = (key, index) => (
-        <Container>
-            <StyledImage
-                sixteenByNine
-                style={{
-                    backgroundImage: `url(${key.urlToImage})`
-                }}
-            />
-            <StyledCardPrimary key={index} onClick={() => window.open(`${key.url}, '_blank'`)}>
-                <div style={{padding: '1rem'}}>
-                    <Typography use="headline5" tag="div">
-                        {key.title}
-                    </Typography>
-                    <Typography use="body1" tag="p" theme="textSecondaryOnBackground">
-                        {key.description}
-                    </Typography>
-                </div>
-            </StyledCardPrimary>
-        </Container>
-    );
+
     return (
         <StyledCard outlined style={{width: '21rem'}}>
             <Typography
@@ -62,7 +66,7 @@ const RenderHeadlines = ({articles, source}) => {
                 style={{padding: '0.5rem 1rem'}}
                 theme="textSecondaryOnBackground"
             >
-                Headlines {source}
+                Headlines {nameOfHeadline}
             </Typography>
 
             <ListDivider/>

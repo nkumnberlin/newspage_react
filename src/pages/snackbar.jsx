@@ -7,7 +7,6 @@ const showSnackbar = ({message, open, setSnackbar}) => (
     <Snackbar open={open} message={message} action={
         <SnackbarAction
             label="Dismiss"
-            onClick={() => console.log('Click Me')}
         />
     }
               onClose={()=> setSnackbar({showSnackbar: false, message: ''})}
